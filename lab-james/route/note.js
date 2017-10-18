@@ -17,7 +17,10 @@ let sendJSON = (res, status, data) => {
 
 router.get('/api/notes', (req, res) => {
   let id = req.url && req.url.query && req.url.query.id;
-
+  console.log(req.url);
+  console.log(req.url.query);
+  console.log(req.url.query.id);
+  console.log(id);
   if(id){
     let note = notes.filter(note => {
       return note.uuid === id;
@@ -49,4 +52,35 @@ router.post('/api/notes', (req, res) => {
   notes.push(note);
 
   sendJSON(res, 200, note);
+});
+
+router.put('/api/notes', (req, res) => {
+  let id = req.url && req.url.query && req.url.query.id;
+
+  if(!req.body){
+    return sendStatus(res, 400, 'Missing body');
+  }
+
+  if(!req.body.name){
+    return sendStatus(res, 400, 'Missing name');
+  }
+
+  if(id){
+
+    let note = notes.filter(note => {
+      return note.uuid === id;
+    });
+
+    if(note){
+      console.log('reached');
+      note.name = req.body.name;
+      note.content = req.body;
+      sendJSON(res, 200, note);
+    } else {
+      sendStatus(res, 404, 'Note not found');
+    }
+
+  } else {
+    sendStatus(res, 400, 'ID required');
+  }
 });

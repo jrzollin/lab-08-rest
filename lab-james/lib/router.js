@@ -11,11 +11,13 @@ const router = module.exports = {
                 if(handler){
                   handler(req, res);
                 } else {
+                  console.error('Not Found', req.url.pathname);
                   res.writeHead(404);
                   res.end();
                 }
               })
               .catch( (err) => {
+                console.error('invalid request', err);
                 res.writeHead(400);
                 res.end();
               });
