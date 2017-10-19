@@ -15,5 +15,9 @@
     "dotenv": "^4.0.0",
     "query-string": "^5.0.0",
     "uuid": "^3.1.0"
+  },
+  "devDependencies": {
+    "jest": "^21.2.1",
+    "superagent": "^3.6.3"
   }
 }
