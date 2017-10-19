@@ -13,12 +13,14 @@ const router = module.exports = {
                 } else {
                   console.error('Not Found', req.url.pathname);
                   res.writeHead(404);
+                  res.write('Path not found');
                   res.end();
                 }
               })
               .catch( (err) => {
                 console.error('invalid request', err);
                 res.writeHead(400);
+                res.write('invalid request');
                 res.end();
               });
   },
